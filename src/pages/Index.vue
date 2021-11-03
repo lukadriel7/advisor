@@ -2,13 +2,15 @@
   <q-page padding>
     <q-card class="q-ma-md">
       <q-card-section>
-        <h4>Enter a number to receive the corresponding amount of advice</h4>
+        <h4>{{ t('title') }}</h4>
       </q-card-section>
       <q-form @submit.prevent="getUniqueRandomArray">
         <q-card-section>
           <q-input
             type="number"
-            :label="`Enter a number between ${adviceMinEntries} and ${adviceMaxEntries} (inclusive)`"
+            :label="
+              t('inputLabel', { min: adviceMinEntries, max: adviceMaxEntries })
+            "
             v-model.number="number"
             lazy-rules
             :rules="[
@@ -21,7 +23,7 @@
             unelevated
             color="primary"
             class="full-width"
-            label="Search advices"
+            :label="t('searchAdvices')"
             type="submit"
           />
         </q-card-actions>
@@ -29,7 +31,7 @@
     </q-card>
     <div class="q-pa-md">
       <q-table
-        title="English Advices"
+        :title="t('englishAdvices')"
         :rows="advices"
         :columns="englishColumns"
         row-key="name"
@@ -38,7 +40,7 @@
     </div>
     <div class="q-pa-md">
       <q-table
-        title="Polish translated Advices"
+        :title="t('polishAdvices')"
         :rows="aggregatedAdvices"
         :columns="translatedColumns"
         row-key="name"
@@ -55,6 +57,7 @@ import useAdviceRepositories from 'src/composables/useAdviceRepositories';
 import useAdvicesTranslators from 'src/composables/useAdviceTranslators';
 import useAdviceAggregators from 'src/composables/useAdviceAggregators';
 import { englishColumns, translatedColumns } from 'components/tableColumns';
+import { useI18n } from 'vue-i18n';
 
 const adviceMinEntries = process.env.ADVICE_MIN_ENTRIES;
 const adviceMaxEntries = process.env.ADVICE_MAX_ENTRIES;
@@ -62,6 +65,8 @@ const adviceMaxEntries = process.env.ADVICE_MAX_ENTRIES;
 export default defineComponent({
   name: 'PageIndex',
   setup() {
+    // eslint-disable-next-line @typescript-eslint/unbound-method
+    const { t } = useI18n();
     const number = ref();
 
     const { getUniqueRandomArray, randomArray } = useUniqueRamdomArray(number);
@@ -70,6 +75,7 @@ export default defineComponent({
     const { translations, isLoading: translationsLoading } =
       useAdvicesTranslators(advices);
     const { aggregatedAdvices } = useAdviceAggregators(advices, translations);
+
     return {
       number,
       adviceMinEntries,
@@ -81,6 +87,7 @@ export default defineComponent({
       advicesLoading,
       translationsLoading,
       aggregatedAdvices,
+      t,
     };
   },
 });

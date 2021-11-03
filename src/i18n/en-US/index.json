@@ -1,0 +1,10 @@
+{
+  "title": "Enter a number to receive the corresponding amount of advice",
+  "inputLabel": "Enter a number between {min} and {max} (inclusive)",
+  "searchAdvices": "Search Advices",
+  "englishAdvices": "English Advices",
+  "polishAdvices": "Polish Translated Advices",
+  "english": "English",
+  "polish": "Polish",
+  "advice": "Advice"
+}

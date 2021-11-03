@@ -1,4 +1,10 @@
 {
-  "failed": "Action failed",
-  "success": "Action was successful"
+  "title": "Wpisz numer, aby otrzymać odpowiednią ilość porady",
+  "inputLabel": "Wpisz liczbę od {min} do {max} (włącznie)",
+  "advice": "Rada",
+  "english": "język angielski",
+  "englishAdvices": "Porady w języku angielskim",
+  "polish": "Polskie",
+  "polishAdvices": "Porady tłumaczone na język polski",
+  "searchAdvices": "Porady dotyczące wyszukiwania"
 }
