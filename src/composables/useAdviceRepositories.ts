@@ -22,7 +22,6 @@ export default function useAdviceRepositories(quantity: Ref<Array<number>>) {
       })
       .catch((err) => console.log(err))
       .finally(() => (isLoading.value = false));
-    console.log(advices.value);
   };
 
   watch(quantity, getAdviceRepositories);
