@@ -4,7 +4,7 @@
       <q-card-section>
         <h4>Enter a number to receive the corresponding amount of advice</h4>
       </q-card-section>
-      <q-form>
+      <q-form @submit.prevent="getUniqueRandomArray">
         <q-card-section>
           <q-input
             type="number"
@@ -33,6 +33,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
+import useUniqueRamdomArray from 'src/composables/useUniqueRandomArray';
 
 const adviceMinEntries = process.env.ADVICE_MIN_ENTRIES;
 const adviceMaxEntries = process.env.ADVICE_MAX_ENTRIES;
@@ -40,11 +41,16 @@ const adviceMaxEntries = process.env.ADVICE_MAX_ENTRIES;
 export default defineComponent({
   name: 'PageIndex',
   setup() {
-    const number = ref<number>();
+    const number = ref();
+
+    const { getUniqueRandomArray, randomArray } = useUniqueRamdomArray(number);
+
     return {
       number,
       adviceMinEntries,
       adviceMaxEntries,
+      getUniqueRandomArray,
+      randomArray,
     };
   },
 });
