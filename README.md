@@ -54,7 +54,6 @@ Create a file `.env` at the root of the folder. You can use the `.env.example` f
 
 ```env
 ADVICESLIP_API=https://api.adviceslip.com/advice #adviceslip API URL
-ADVICE_MAX_NUMBER=224 # the number of advices available on the api
 ADVICE_MIN_ENTRIES=5 # The smallest number of advice the user can request
 ADVICE_MAX_ENTRIES=20 # The largest number of advice the user can request
 LIBRETRANSLATE_API=https://libretranslate.de/translate #libretranslate API URL

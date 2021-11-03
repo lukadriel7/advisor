@@ -4,7 +4,7 @@
       <q-card-section>
         <h4>Enter a number to receive the corresponding amount of advice</h4>
       </q-card-section>
-      <q-form @submit.prevent="getUniqueRandomArray">
+      <q-form @submit.prevent="getAdviceRepositories">
         <q-card-section>
           <q-input
             type="number"
@@ -50,7 +50,6 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
-import useUniqueRamdomArray from 'src/composables/useUniqueRandomArray';
 import useAdviceRepositories from 'src/composables/useAdviceRepositories';
 import useAdvicesTranslators from 'src/composables/useAdviceTranslators';
 import useAdviceAggregators from 'src/composables/useAdviceAggregators';
@@ -63,10 +62,11 @@ export default defineComponent({
   name: 'PageIndex',
   setup() {
     const number = ref();
-
-    const { getUniqueRandomArray, randomArray } = useUniqueRamdomArray(number);
-    const { advices, isLoading: advicesLoading } =
-      useAdviceRepositories(randomArray);
+    const {
+      advices,
+      isLoading: advicesLoading,
+      getAdviceRepositories,
+    } = useAdviceRepositories(number);
     const { translations, isLoading: translationsLoading } =
       useAdvicesTranslators(advices);
     const { aggregatedAdvices } = useAdviceAggregators(advices, translations);
@@ -74,7 +74,7 @@ export default defineComponent({
       number,
       adviceMinEntries,
       adviceMaxEntries,
-      getUniqueRandomArray,
+      getAdviceRepositories,
       englishColumns,
       translatedColumns,
       advices,
