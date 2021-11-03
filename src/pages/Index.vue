@@ -36,6 +36,15 @@
         :loading="advicesLoading"
       />
     </div>
+    <div class="q-pa-md">
+      <q-table
+        title="Polish translated Advices"
+        :rows="aggregatedAdvices"
+        :columns="translatedColumns"
+        row-key="name"
+        :loading="translationsLoading"
+      />
+    </div>
   </q-page>
 </template>
 
@@ -43,7 +52,9 @@
 import { defineComponent, ref } from 'vue';
 import useUniqueRamdomArray from 'src/composables/useUniqueRandomArray';
 import useAdviceRepositories from 'src/composables/useAdviceRepositories';
-import { englishColumns } from 'components/tableColumns';
+import useAdvicesTranslators from 'src/composables/useAdviceTranslators';
+import useAdviceAggregators from 'src/composables/useAdviceAggregators';
+import { englishColumns, translatedColumns } from 'components/tableColumns';
 
 const adviceMinEntries = process.env.ADVICE_MIN_ENTRIES;
 const adviceMaxEntries = process.env.ADVICE_MAX_ENTRIES;
@@ -56,14 +67,20 @@ export default defineComponent({
     const { getUniqueRandomArray, randomArray } = useUniqueRamdomArray(number);
     const { advices, isLoading: advicesLoading } =
       useAdviceRepositories(randomArray);
+    const { translations, isLoading: translationsLoading } =
+      useAdvicesTranslators(advices);
+    const { aggregatedAdvices } = useAdviceAggregators(advices, translations);
     return {
       number,
       adviceMinEntries,
       adviceMaxEntries,
       getUniqueRandomArray,
       englishColumns,
+      translatedColumns,
       advices,
       advicesLoading,
+      translationsLoading,
+      aggregatedAdvices,
     };
   },
 });
