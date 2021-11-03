@@ -48,6 +48,18 @@ npm install --global @quasar/cli
 
 ## Development
 
+### Environment variables (Important)
+
+Create a file `.env` at the root of the folder. You can use the `.env.example` file as a template. The used environment variables are :
+
+```env
+ADVICESLIP_API=https://api.adviceslip.com/advice #adviceslip API URL
+ADVICE_MAX_NUMBER=224 # the number of advices available on the api
+ADVICE_MIN_ENTRIES=5 # The smallest number of advice the user can request
+ADVICE_MAX_ENTRIES=20 # The largest number of advice the user can request
+LIBRETRANSLATE_API=https://libretranslate.de/translate #libretranslate API URL
+```
+
 ### Start the app in development mode (hot-code reloading, error reporting, etc.)
 
 Using Quasar cli:
@@ -64,7 +76,7 @@ yarn dev
 
 Visit http://localhost:8080 in your browser
 
-### Build the app for production
+### Build the app for production (Required for deployment)
 
 Using Quasar cli:
 
@@ -114,6 +126,8 @@ server {
     }
 }
 ```
+
+copy the content of `dist/spa` to /data/www
 
 Make sure to remove all other default server configuration already existing.
 Visit http://localhost in your browser
