@@ -2,6 +2,10 @@
 
 A web app giving random advices
 
+## Get the repository
+
+Clone this repository using `git clone https://github.com/lukadriel7/advisor.git`
+
 ## Install the dependencies
 
 This project was built using yarn, and requires node >= 14 and npm >= 6 to be installed.
@@ -142,3 +146,7 @@ quasar serve --history dist/spa
 
 Visit http://localhost:4000 in your browser
 you can read more about the serve command at https://quasar.dev/quasar-cli/commands-list#serve
+
+## How to use
+
+Enter a number in the input element to get the corresponding number of advices both in english and a side by side english and polish translation.
